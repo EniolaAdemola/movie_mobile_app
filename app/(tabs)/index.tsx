@@ -1,3 +1,4 @@
+import MovieCard from "@/components/MovieCard";
 import SearchBar from "@/components/SearchBar_temp";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
@@ -35,7 +36,7 @@ export default function Index() {
           <ActivityIndicator size="large" color="#ab8bff" className="mt-10" />
         ) : movieError ? (
           <Text className="text-red-500 text-center mt-10">
-            {movieError.message}
+            Error: {movieError.message}
           </Text>
         ) : (
           <View className="flex-1 mt-5">
@@ -51,28 +52,25 @@ export default function Index() {
               </Text>
               <FlatList
                 data={movies}
-                keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-                  <View
-                    className="bg-dark-200 rounded-lg p-4 mb-4"
-                    // onTouchEnd={() => router.push(`/movie/${item.id}`)}
-                  >
-                    <Image
-                      source={{
-                        uri: `https://image.tmdb.org/t/p/w500${item.poster_path}`,
-                      }}
-                      className="w-full h-48 rounded-lg mb-2"
-                      resizeMode="cover"
-                    />
-                    <Text className="text-white text-lg font-semibold">
-                      {item.title}
-                    </Text>
-                    <Text className="text-gray-400 text-sm mt-1">
-                      {item.release_date}
-                    </Text>
-                  </View>
+                  <MovieCard
+                    {...item}
+                    // onPress={() => router.push(`/movie/${item.id}`)}
+                  />
+                  // <Text className="text-white text-lg font-semibold">
+                  //   {item.title}
+                  // </Text>
                 )}
-                showsVerticalScrollIndicator={false}
+                keyExtractor={(item) => item.id.toString()}
+                numColumns={3}
+                columnWrapperStyle={{
+                  justifyContent: "flex-start",
+                  gap: 10,
+                  paddingRight: 5,
+                  marginBottom: 10,
+                }}
+                className="mt-2 pb-32"
+                scrollEnabled={false}
               />
             </>
           </View>
