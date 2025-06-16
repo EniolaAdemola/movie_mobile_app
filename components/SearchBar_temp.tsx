@@ -6,9 +6,17 @@ type Props = {
   placeholder: string;
   onPress?: () => void;
   className?: string;
+  value?: string;
+  onChangeText?: (text: string) => void;
 };
 
-const SearchBar = ({ placeholder, onPress, className }: Props) => {
+const SearchBar = ({
+  placeholder,
+  onPress,
+  className,
+  value,
+  onChangeText,
+}: Props) => {
   return (
     <View className="flex-row items-center bg-dark-100 rounded-full px-5 py-4">
       <Image
@@ -18,9 +26,12 @@ const SearchBar = ({ placeholder, onPress, className }: Props) => {
         tintColor="#ab8bff"
       />
       <TextInput
-        onPress={onPress}
+        // onPress={onPress}
         placeholder={placeholder}
         className={className}
+        placeholderTextColor="#ab8bff"
+        value={value}
+        onChangeText={onChangeText}
       />
     </View>
   );
